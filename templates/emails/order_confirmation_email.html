@@ -1,0 +1,45 @@
+<!-- templates/emails/order_confirmation_email.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Order Confirmation</title>
+    <style>
+        /* Add any CSS styling here */
+        .email-container {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .header {
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Thank you for your order!</h1>
+        </div>
+        <div class="content">
+            <p>Dear Customer,</p>
+            <p>Thank you for your order. Here are the details:</p>
+            <h3>Order Summary:</h3>
+            <ul>
+                <li>Order Number: {{ order_number }}</li>
+                {% for product in products %}
+                    <li>{{ product.price_data.product_data.name|safe }} - {{ product.quantity }} x {{ product.price_data.unit_amount|floatformat:2 }} {{ product.price_data.currency|safe}}</li>
+                {% endfor %}
+                <li>Total Amount: {{ total_amount}} {{ currency|safe }}</li>
+            </ul>
+            <p>We will notify you once your order has been shipped.</p>
+            <p>Best regards,</p>
+            <p>DripSaint</p>
+        </div>
+    </div>
+</body>
+</html>
